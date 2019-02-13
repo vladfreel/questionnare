@@ -31,7 +31,7 @@ class Api::V1::AnswersController < ApplicationController
 
   # DELETE /answers/:id
   def destroy
-    @question.destroy
+    @answer.destroy
     head :no_content
   end
 
