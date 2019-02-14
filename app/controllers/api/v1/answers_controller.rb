@@ -6,7 +6,7 @@ class Api::V1::AnswersController < ApplicationController
     question = Question.find(params[:answer][:question_id])
     @answer = question.answers.create(answer_params)
     if @answer.save!
-      render json: @answer, status: :created
+      render json: @answer.question.to_json(include: :answers), status: :created
     else
       render json: @answer.errors, status: :unprocessable_entity
     end
