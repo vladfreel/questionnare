@@ -5,7 +5,7 @@ RSpec.describe Api::V1::QuestionsController, type: :controller do
   describe 'CREATE' do
     it 'create category(CREATE)' do
       expect do
-        post :create, params: { content: 'some text' }
+        post :create, params: { question: {content: 'some text'} }
       end.to change { Question.count }.by(1) and
           redirect_to Question.last && have_http_status(200)
       expect(response.content_type).to eq("application/json")
@@ -19,6 +19,16 @@ RSpec.describe Api::V1::QuestionsController, type: :controller do
       expect(response.content_type).to eq("application/json")
       expect(assigns(:questions)).to eq([question])
       expect(response).to have_http_status(200)
+    end
+  end
+
+  describe 'PUT update' do
+    it "allows an article to be updated" do
+      question = create(:question)
+      put :update, params: {id: question.id,
+                            question: question.attributes = { content: 'new content' }}
+      expect(response).to have_http_status(204)
+      expect(question.content).to eql 'new content'
     end
   end
 

@@ -4,7 +4,7 @@ class Api::V1::QuestionsController < ApplicationController
   # GET /questions
   def index
     @questions = Question.all
-    render json: @questions.to_json(:include => :answers)
+    render json: @questions.to_json(:include => :answers), status: :ok
   end
 
   # POST /questions
@@ -20,12 +20,12 @@ class Api::V1::QuestionsController < ApplicationController
 
   # GET /questions/:id
   def show
-    render json: @question.to_json(:include => :answers)
+    render json: @question.to_json(:include => :answers), status: :ok
   end
 
   # PUT /questions/:id
   def update
-    @question.update(question_params)
+    @question.update!(question_params)
     head :no_content
   end
 
@@ -39,7 +39,7 @@ class Api::V1::QuestionsController < ApplicationController
 
   def question_params
     # whitelist params
-    params.permit(:content)
+    params.require(:question).permit(:content)
   end
 
   def set_question

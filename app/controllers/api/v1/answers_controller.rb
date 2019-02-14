@@ -1,26 +1,16 @@
 class Api::V1::AnswersController < ApplicationController
-  before_action :get_answer, only: [ :show, :update, :destroy ]
-  # GET /answers
-  def index
-    @answers = Answer.all
-    render json: @answers
-  end
+  before_action :get_answer, only: [ :update, :destroy ]
 
   # POST /answers
   def create
-    @question = Question.find(params[:question_id])
-    @answer = @question.answers.create(answer_params)
+    question = Question.find(params[:answer][:question_id])
+    @answer = question.answers.create(answer_params)
     if @answer.save!
       render json: @answer, status: :created
     else
       render json: @answer.errors, status: :unprocessable_entity
     end
 
-  end
-
-  # GET /answers/:id
-  def show
-    render json: @answer
   end
 
   # PUT /answers/:id
@@ -39,10 +29,10 @@ class Api::V1::AnswersController < ApplicationController
 
   def answer_params
     # whitelist params
-    params.permit(:content, :question_id)
+    params.require(:answer).permit(:content, :question_id)
   end
 
-  def find_question
+  def get_answer
     @answer = Answer.find(params[:id])
   end
 end
