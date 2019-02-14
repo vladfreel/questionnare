@@ -43,7 +43,8 @@ RSpec.describe 'Questions API', type: :request do
     delete "/api/v1/questions/#{question.id}"
 
     expect(response).to have_http_status(:no_content)
-    expect(question).to eq(nil)
+    expect(Question.all.count).to eq(0)
+    expect(Answer.all.count).to eq(0)
   end
 
 end
