@@ -1,5 +1,5 @@
 class Api::V1::AnswersController < ApplicationController
-  before_action :find_answer, only: %i[update destroy]
+  before_action :find_answer, only: %i[show update destroy]
 
   # POST /answers
   def create
@@ -13,9 +13,14 @@ class Api::V1::AnswersController < ApplicationController
   end
 
   # PUT /answers/:id
+  def show
+    render json: @answer.to_json, status: :ok
+  end
+
+  # PUT /answers/:id
   def update
     @answer.update(answer_params)
-    head :no_content
+    render json: @answer.question, status: :ok
   end
 
   # DELETE /answers/:id

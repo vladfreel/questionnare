@@ -25,7 +25,7 @@ class Api::V1::QuestionsController < ApplicationController
   # PUT /questions/:id
   def update
     @question.update!(question_params)
-    head :no_content
+    render json: @question.to_json(include: :answers), status: :no_content
   end
 
   # DELETE /questions/:id
