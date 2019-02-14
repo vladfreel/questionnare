@@ -10,7 +10,8 @@ RSpec.describe 'Questions API', type: :request do
 
   it 'updates a Question' do
     question = create(:question)
-    put "/api/v1/questions/#{question.id}", params: { question: {content: 'New content'} }
+    put "/api/v1/questions/#{question.id}",
+        params: { question: {content: 'New content'} }
     expect(response).to have_http_status(:no_content)
   end
 

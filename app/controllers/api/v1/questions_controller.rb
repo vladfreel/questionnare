@@ -1,10 +1,10 @@
 class Api::V1::QuestionsController < ApplicationController
-  before_action :set_question, only: [:show, :update, :destroy]
+  before_action :set_question, only: %i[show update destroy]
 
   # GET /questions
   def index
     @questions = Question.all
-    render json: @questions.to_json(:include => :answers), status: :ok
+    render json: @questions.to_json(include: :answers), status: :ok
   end
 
   # POST /questions
@@ -15,12 +15,11 @@ class Api::V1::QuestionsController < ApplicationController
     else
       render json: @question.errors, status: :unprocessable_entity
     end
-
   end
 
   # GET /questions/:id
   def show
-    render json: @question.to_json(:include => :answers), status: :ok
+    render json: @question.to_json(include: :answers), status: :ok
   end
 
   # PUT /questions/:id

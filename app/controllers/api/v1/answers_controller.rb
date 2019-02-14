@@ -1,5 +1,5 @@
 class Api::V1::AnswersController < ApplicationController
-  before_action :get_answer, only: [ :update, :destroy ]
+  before_action :find_answer, only: %i[update destroy]
 
   # POST /answers
   def create
@@ -10,7 +10,6 @@ class Api::V1::AnswersController < ApplicationController
     else
       render json: @answer.errors, status: :unprocessable_entity
     end
-
   end
 
   # PUT /answers/:id
@@ -32,7 +31,7 @@ class Api::V1::AnswersController < ApplicationController
     params.require(:answer).permit(:content, :question_id)
   end
 
-  def get_answer
+  def find_answer
     @answer = Answer.find(params[:id])
   end
 end

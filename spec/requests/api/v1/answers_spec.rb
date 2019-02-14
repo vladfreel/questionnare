@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Answers API' do
   it 'creates a Question' do
     question = create(:question)
-    post '/api/v1/answers', params: { answer: {content: 'Some text', question_id: question.id } }
+    post '/api/v1/answers', params: { answer: {content: 'Some text',
+                                               question_id: question.id } }
     expect(response.content_type).to eq('application/json')
     expect(response).to have_http_status(:created)
   end

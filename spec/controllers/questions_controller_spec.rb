@@ -8,7 +8,7 @@ RSpec.describe Api::V1::QuestionsController, type: :controller do
         post :create, params: { question: {content: 'some text'} }
       end.to change { Question.count }.by(1) and
           redirect_to Question.last && have_http_status(200)
-      expect(response.content_type).to eq("application/json")
+      expect(response.content_type).to eq('application/json')
     end
   end
 
@@ -16,7 +16,7 @@ RSpec.describe Api::V1::QuestionsController, type: :controller do
     it 'assigns @categories' do
       question = create(:question)
       get :index
-      expect(response.content_type).to eq("application/json")
+      expect(response.content_type).to eq('application/json')
       expect(assigns(:questions)).to eq([question])
       expect(response).to have_http_status(200)
     end
@@ -38,7 +38,7 @@ RSpec.describe Api::V1::QuestionsController, type: :controller do
       answer = create(:answer, question: question)
       get :show, params: { id: question.id }
       expect(assigns(:question)).to eq(question)
-      expect(response.content_type).to eq("application/json")
+      expect(response.content_type).to eq('application/json')
       expect(response).to have_http_status(200)
     end
   end
