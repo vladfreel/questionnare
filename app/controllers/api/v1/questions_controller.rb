@@ -1,5 +1,5 @@
 class Api::V1::QuestionsController < ApplicationController
-  before_action :set_question, only: %i[show update destroy]
+  before_action :find_question, only: %i[show update destroy]
 
   # GET /questions
   def index
@@ -41,7 +41,7 @@ class Api::V1::QuestionsController < ApplicationController
     params.require(:question).permit(:content)
   end
 
-  def set_question
+  def find_question
     @question = Question.find(params[:id])
   end
 end
