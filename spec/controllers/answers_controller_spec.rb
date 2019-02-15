@@ -21,7 +21,7 @@ RSpec.describe Api::V1::AnswersController, type: :controller do
       put :update, params: { id: answer.id,
                              answer: answer.attributes = { content: 'new content' },
                              question_id: question }
-      expect(response).to have_http_status(204)
+      expect(response).to have_http_status(200)
       expect(answer.content).to eql 'new content'
     end
   end

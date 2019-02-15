@@ -13,7 +13,7 @@ RSpec.describe 'Answers API' do
     question = create(:question)
     answer = create(:answer, question: question)
     put "/api/v1/answers/#{answer.id}", params: { answer: {content: 'New content'} }
-    expect(response).to have_http_status(:no_content)
+    expect(response).to have_http_status(:ok)
   end
 
   it 'destroy question' do
