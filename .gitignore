@@ -20,7 +20,6 @@
 .byebug_history
 .idea
 /config/database.yml
-/config/secrets.yml
 .ruby-gemset
 .ruby-version
-
+.env
