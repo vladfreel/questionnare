@@ -12,7 +12,7 @@ RSpec.describe 'Questions API', type: :request do
     question = create(:question)
     put "/api/v1/questions/#{question.id}",
         params: { question: {content: 'New content'} }
-    expect(response).to have_http_status(:no_content)
+    expect(response).to have_http_status(:ok)
   end
 
   it 'gets a list of questions with answers' do

@@ -24,8 +24,11 @@ class Api::V1::QuestionsController < ApplicationController
 
   # PUT /questions/:id
   def update
-    @question.update!(question_params)
-    render json: @question.to_json(include: :answers), status: :no_content
+    if @question.update(question_params)
+      render json: @question.to_json(include: :answers)
+    else
+      render json: @question.errors, status: :unprocessable_entity
+    end
   end
 
   # DELETE /questions/:id
